@@ -1,6 +1,7 @@
 <?php
 namespace App\Doctrine\Entity;
 
+use Curso;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
@@ -22,13 +23,19 @@ class Aluno {
   private string $name;
 
   /**
-   * @OneToMany(targetEntity="Telefone", mappedBy="aluno")
+   * @OneToMany(targetEntity="Telefone", mappedBy="aluno", cascade={"remove","persist"})
    */
   private Collection $telefones;
+
+  /**
+   * @ManyToMany(targetEntity="Curso", mappedBy="alunos")
+   */
+  private Collection $cursos;
 
   public function __construct()
   {
     $this->telefones = new ArrayCollection();
+    $this->cursos = new ArrayCollection();
   }
 
   public function getId():int {
@@ -56,6 +63,26 @@ class Aluno {
   public function addTelefone(Telefone $telefone):self {
     $this->telefones->add($telefone);
     $telefone->setAluno($this);
+    return $this;
+  }
+
+  public function getCursos(): Collection {
+    return $this->cursos;
+  }
+    
+  public function setCurso(Collection $cursos):self {
+    $this->cursos = $cursos;
+    return $this;
+  }
+
+  public function addCurso(Curso $curso):self {
+
+    if ($this->cursos->contains($curso)) {
+      return $this;
+    }
+
+    $this->cursos->add($curso);
+    $curso->addAluno($this);
     return $this;
   }
 }
