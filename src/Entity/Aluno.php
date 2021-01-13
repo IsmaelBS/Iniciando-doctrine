@@ -6,7 +6,7 @@ use Doctrine\Common\Collections\Collection;
 use App\Doctrine\Entity\Curso;
 
 /**
- * @Entity
+ * @Entity(repositoryClass="App\Doctrine\Repositories\AlunoRepository")
  */
 class Aluno {
     
@@ -23,7 +23,7 @@ class Aluno {
   private string $name;
 
   /**
-   * @OneToMany(targetEntity="Telefone", mappedBy="aluno", cascade={"remove","persist"})
+   * @OneToMany(targetEntity="Telefone", mappedBy="aluno", cascade={"remove","persist"}, fetch="EAGER")
    */
   private Collection $telefones;
 

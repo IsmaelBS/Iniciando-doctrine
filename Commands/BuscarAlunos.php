@@ -11,7 +11,6 @@ $entityManager = $entityManagerFactory->getEntityManager();
 
 $alunoRepository = $entityManager->getRepository(Aluno::class);
 
-
 /**
  * @var Aluno[] $alunoList
  */
