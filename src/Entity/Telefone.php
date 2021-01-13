@@ -19,7 +19,7 @@ class Telefone {
   private string $numero;
 
   /**
-   * @ManyToOne(targetEntity="Aluno")
+   * @ManyToOne(targetEntity="Aluno",inversedBy="telefones")
    */
   private Aluno $aluno;
 
