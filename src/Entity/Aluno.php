@@ -22,9 +22,14 @@ class Aluno {
   private string $name;
 
   /**
-   * @OneToMany(targetEntity="Telefone", mappedBy="Aluno", cascade={ "persist", "remove" })
+   * @OneToMany(targetEntity="Telefone", mappedBy="aluno")
    */
   private Collection $telefones;
+
+  public function __construct()
+  {
+    $this->telefones = new ArrayCollection();
+  }
 
   public function getId():int {
     return $this->id;
@@ -39,7 +44,7 @@ class Aluno {
     return $this;
   }
 
-  public function getTelefones():Collection {
+  public function getTelefones(): Collection {
     return $this->telefones;
   }
     
@@ -49,8 +54,8 @@ class Aluno {
   }
 
   public function addTelefone(Telefone $telefone):self {
-    $telefone->setAluno($this);
     $this->telefones->add($telefone);
+    $telefone->setAluno($this);
     return $this;
   }
 }
