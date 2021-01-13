@@ -1,9 +1,9 @@
 <?php
 namespace App\Doctrine\Entity;
 
-use Curso;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use App\Doctrine\Entity\Curso;
 
 /**
  * @Entity
